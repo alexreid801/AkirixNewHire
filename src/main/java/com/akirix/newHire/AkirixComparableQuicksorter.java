@@ -24,21 +24,21 @@ public class AkirixComparableQuicksorter {
 		T part = a[rightIndex]; //Get comparable at right index of array
 		while(true) { //Continue until break when i less than or equal to j
 			while(less(a[++i], part)) if(i == rightIndex) break; 
-			while(less(part, a[--j])) if (j == leftIndex) break;
-			if(i >= j) break;
-			exch(a, i, j);
+			while(less(part, a[--j])) if (j == leftIndex) break; 
+			if(i >= j) break; 
+			exch(a, i, j); 
 		}
-		exch(a, leftIndex, j);
-		return j;
+		exch(a, leftIndex, j); 
+		return j; 
 	}
 	
 	private static <T extends Comparable<T>> boolean less(T a, T b) {
-		return a.compareTo(b) <= 0;
+		return a.compareTo(b) <= 0; //Comparable representation a less than b
 	}
 	
 	private static <T extends Comparable<T>> void exch(T[] a, int i, int j) {
-		T b = a[i];
-		a[i] = a[j];
-		a[j] = b;
+		T b = a[i]; //Temporarily move value at first postion to the side
+		a[i] = a[j]; //Move move value at second position to first position
+		a[j] = b; //Move temporary value of first postion to second position
 	}
 }
