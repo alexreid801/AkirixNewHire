@@ -35,7 +35,7 @@ public class Employee implements Comparable<Employee> {
 	}
 	
 	public String toString() { 
-	    return this.getLastName() + ", " + this.getFirstName();
+	    return "{" + this.getLastName() + ", " + this.getFirstName() + "}";
 	} 
 
 }
