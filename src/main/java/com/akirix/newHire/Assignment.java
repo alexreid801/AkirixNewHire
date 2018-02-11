@@ -2,7 +2,9 @@ package com.akirix.newHire;
 
 import java.util.Arrays;
 
-import com.akirix.newHire.AkirixComparableQuicksorter.SortOrder;
+import com.akirix.newHire.quickSort.AkirixComparableQuicksorter;
+import com.akirix.newHire.quickSort.Employee;
+import com.akirix.newHire.quickSort.AkirixComparableQuicksorter.SortOrder;
 
 public class Assignment {
 

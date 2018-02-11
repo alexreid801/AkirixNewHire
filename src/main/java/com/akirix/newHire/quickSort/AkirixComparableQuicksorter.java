@@ -1,4 +1,4 @@
-package com.akirix.newHire;
+package com.akirix.newHire.quickSort;
 
 import edu.princeton.cs.introcs.StdRandom;
 
@@ -24,7 +24,7 @@ public class AkirixComparableQuicksorter {
 		T p = a[leftIndex];
 		while(true) { 
 			while(compare(a[++i], p, order)) if(i == rightIndex) break; 
-			while(compare(p, a[--j], order)) if(j == leftIndex)  break; 
+			while(compare(p, a[--j], order)) {}
 			if(i >= j) break; 
 			exch(a, i, j); 
 		}

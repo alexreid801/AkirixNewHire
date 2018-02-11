@@ -1,4 +1,4 @@
-package com.akirix.newHire;
+package com.akirix.newHire.quickSort;
 
 public class Planet implements Comparable<Planet> {
 
