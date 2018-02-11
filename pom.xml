@@ -5,4 +5,12 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Akirix New Hire</name>
   <description>A couple small skills tests for Akirix new hires.</description>
+  
+  <dependencies>
+	 <dependency>
+	   <groupId>com.github.fracpete</groupId>
+	   <artifactId>princeton-java-stdlib</artifactId>
+	   <version>1.0.2</version>
+	 </dependency>
+  </dependencies>
 </project>

@@ -1,8 +1,15 @@
 package com.akirix.newHire;
 
+import edu.princeton.cs.introcs.StdRandom;
+
 public class AkirixComparableQuicksorter {
 
-	public static <T extends Comparable<T>> void quickSort(T[] a, int leftIndex, int rightIndex) {
+	public static <T extends Comparable<T>> void quickSort(T[] a) {
+		StdRandom.shuffle(a); //Make less dependent on input
+		quickSort(a, 0, a.length - 1); //Perform the sort expounding by adding left and right index
+	}
+	
+	private static <T extends Comparable<T>> void quickSort(T[] a, int leftIndex, int rightIndex) {
 		if(leftIndex <= rightIndex) return; //Stop when left and right indexes meet
 		int j = partition(a, leftIndex, rightIndex); //Partition current
 		quickSort(a, leftIndex, j - 1); //Sort next index level to the right from the left index
