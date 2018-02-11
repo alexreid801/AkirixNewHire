@@ -4,9 +4,11 @@ import edu.princeton.cs.introcs.StdRandom;
 
 public class AkirixComparableQuicksorter {
 
-	public static <T extends Comparable<T>> void quickSort(T[] a) {
-		StdRandom.shuffle(a); //Make less dependent on input
-		quickSort(a, 0, a.length - 1); //Perform the sort expounding by adding left and right index
+	public static <T extends Comparable<T>> T[] quickSort(T[] a) {
+		T[] sorted = a.clone(); //Make a copy of the array to a new referece 'sorted' array
+		StdRandom.shuffle(sorted); //Make less dependent on input
+		quickSort(sorted, 0, sorted.length - 1); //Perform the sort expounding by adding left and right index
+		return sorted; //Return the sorted version of the array
 	}
 	
 	private static <T extends Comparable<T>> void quickSort(T[] a, int leftIndex, int rightIndex) {
