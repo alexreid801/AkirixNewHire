@@ -2,6 +2,8 @@ package com.akirix.newHire;
 
 import java.util.Arrays;
 
+import com.akirix.newHire.AkirixComparableQuicksorter.SortOrder;
+
 public class Assignment {
 
 	public static void main(String[] args) {
@@ -36,16 +38,21 @@ public class Assignment {
 		System.out.println("Unsorted employees array:");
 		System.out.println(Arrays.toString(unsortedEmployees));
 		
-		//Sort the unsorted employees to a sorted employees array (While not altering the original array)
-		Employee[] sortedEmployees = AkirixComparableQuicksorter.quickSort(unsortedEmployees);
+		//Sort the unsorted employees to a sorted employees array (While not altering the original array) ascending then descending
+		Employee[] ascendinglySortedEmployees = AkirixComparableQuicksorter.quickSort(unsortedEmployees, SortOrder.ASC);
+		Employee[] descendinglySortedEmployees = AkirixComparableQuicksorter.quickSort(unsortedEmployees, SortOrder.DESC);
 		
-		//Print the unsorted array again (this shows that it is unchanged)
-		System.out.println("Unsorted employees array:");
+		//Print the ascendingly sorted array
+		System.out.println("Ascendingly sorted employees array:");
+		System.out.println(Arrays.toString(ascendinglySortedEmployees));
+		
+		//Print the descendingly sorted array
+		System.out.println("Descendingly sorted employees array:");
+		System.out.println(Arrays.toString(descendinglySortedEmployees));
+		
+		//Print the unsorted array again (this shows that it is unchanged!)
+		System.out.println("Original unsorted employees array:");
 		System.out.println(Arrays.toString(unsortedEmployees));
-		
-		//Print the sorted array
-		System.out.println("Sorted employees array:");
-		System.out.println(Arrays.toString(sortedEmployees));
 	}
 	
 	private static void runSecondAssignment() {
