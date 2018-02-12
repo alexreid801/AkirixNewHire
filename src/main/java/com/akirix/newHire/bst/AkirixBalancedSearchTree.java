@@ -153,12 +153,46 @@ public class AkirixBalancedSearchTree {
 		return spacer;
 	}
 	
-	public boolean isRed(Node x) {
+	private Node rotateLeft(Node node) {
+		
+		//Make temp node and switch root left and temp right nodes
+		Node x = node.getRight();
+		node.setRight(x.getLeft());
+		x.setLeft(node);
+		
+		//Switch root color and temp color
+		x.setColor(node.getColor());
+		node.setColor(RED);
+		
+		//Switch size and adjust root nodes size to reflect new structure
+		x.setSize(node.getSize());
+		node.setSize(1 + node.getLeft().getSize() + node.getRight().getSize());
+		return x;
+	}
+	
+	private Node rotateRight(Node node) {
+		
+		//Make temp node and switch root right and temp left nodes
+		Node x = node.getLeft();
+		node.setLeft(x.getRight());
+		x.setRight(node);
+		
+		//Switch root color and temp color
+		x.setColor(node.getColor());
+		node.setColor(RED);
+		
+		//Switch size and adjust root nodes size to reflect new structure
+		x.setSize(node.getSize());
+		node.setSize(1 + node.getLeft().getSize() + node.getRight().getSize());
+		return x;
+	}
+	
+	private boolean isRed(Node x) {
 		if(x == null) return false;
 		return x.getColor() == RED;
 	}
 	
-	public boolean isBlack(Node x) {
+	private boolean isBlack(Node x) {
 		if(x == null) return true;
 		return x.getColor() == BLACK;
 	}
