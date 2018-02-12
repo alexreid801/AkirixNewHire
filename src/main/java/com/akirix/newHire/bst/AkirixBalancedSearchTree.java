@@ -5,7 +5,7 @@ public class AkirixBalancedSearchTree {
 	private Node root;
 	
 	private static final boolean RED   = true;
-	private static final boolean BLACK = true;
+	private static final boolean BLACK = false;
 	
 	class Node {
 		
@@ -94,12 +94,25 @@ public class AkirixBalancedSearchTree {
 		}
 		
 		//Need to rotate left if right is red while left is black
-		if(isRed(node.getRight()) && !isRed(node.getLeft())) {
-			node = rotateLeft(node);
-		}
+		//if(node.getRight() != null && node.getLeft() != null) {
+			if(isRed(node.getRight()) && !isRed(node.getLeft())) {
+				node = rotateLeft(node);
+			}
+		//}
+		
 		//Need to rotate right if left and left's left are both red
+		//if(node.getLeft() != null) {
+			//if(node.getLeft().getLeft() != null) {
+				if(isRed(node.getLeft()) && isRed(node.getLeft().getLeft())) {
+					node = rotateRight(node);
+				}
+			//}
+		//}
 		
 		//Need to flip colors if both left and right children are red
+		if(isRed(node.getLeft()) && isRed(node.getRight())) {
+			flipColors(node);
+		}
 		
 		//Set the side
 		//node.setSize(node.getLeft().getSize() + node.getRight().getSize());
@@ -139,14 +152,10 @@ public class AkirixBalancedSearchTree {
 		System.out.print(makeSpacer(nestings) + (node == null ? "NULL" : node.getValue()));
 		System.out.print("\n");
 		if(node != null) {
-			if(node.getLeft() != null) {
-				if(isRed(node)) print(nestings, node.getLeft());
-				else print(nestings + 1, node.getLeft());
-			}
-			if(node.getRight() != null) {
-				if(isRed(node)) print(nestings, node.getRight());
-				else print(nestings + 1, node.getRight());
-			}
+			if(isRed(node.getLeft())) print(nestings, node.getLeft());
+			if(isBlack(node.getLeft())) print(nestings + 1, node.getLeft());
+			if(isRed(node.getRight())) print(nestings, node.getRight());
+			if(isBlack(node.getRight())) print(nestings + 1, node.getRight());
 		}
 	}
 	
