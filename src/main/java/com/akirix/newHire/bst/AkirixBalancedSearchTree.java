@@ -30,11 +30,11 @@ public class AkirixBalancedSearchTree<Key extends Comparable<Key>> {
 			this.key = key;
 		}
 
-		public Value getValue() {
+		public String getValue() {
 			return value;
 		}
 
-		public void setValue(Value value) {
+		public void setValue(String value) {
 			this.value = value;
 		}
 
