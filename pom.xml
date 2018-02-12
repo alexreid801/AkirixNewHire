@@ -1,16 +1,46 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.akirix</groupId>
-  <artifactId>NewHire</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>Akirix New Hire</name>
-  <description>A couple small skills tests for Akirix new hires.</description>
-  
-  <dependencies>
-	 <dependency>
-	   <groupId>com.github.fracpete</groupId>
-	   <artifactId>princeton-java-stdlib</artifactId>
-	   <version>1.0.2</version>
-	 </dependency>
-  </dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.akirix</groupId>
+	<artifactId>NewHire</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Akirix New Hire</name>
+	<description>A couple small skills tests for Akirix new hires.</description>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<mainClass>com.akirix.newHire.Assignment</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.github.fracpete</groupId>
+			<artifactId>princeton-java-stdlib</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+	</dependencies>
+
 </project>

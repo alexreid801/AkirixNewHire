@@ -1,4 +1,4 @@
-package com.akirix.newHire.quickSort;
+package com.akirix.newHire.quickSort.comparables;
 
 public class Employee implements Comparable<Employee> {
 	

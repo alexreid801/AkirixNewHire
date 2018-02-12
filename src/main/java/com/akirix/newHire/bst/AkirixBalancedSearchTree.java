@@ -1,6 +1,6 @@
 package com.akirix.newHire.bst;
 
-public class AkirixBalancedSearchTree<Key extends Comparable<Key>> {
+public class AkirixBalancedSearchTree {
 	
 	private Node root;
 	
@@ -9,25 +9,15 @@ public class AkirixBalancedSearchTree<Key extends Comparable<Key>> {
 	
 	class Node {
 		
-		private Key key;
 		private String value;
 		private Node left, right;
 		private int size;
 		private boolean color;
 		
-		public Node(Key key, String value, int size, boolean color) {
-			this.key = key;
+		public Node(String value, int size, boolean color) {
 			this.value = value;
 			this.size = size;
 			this.color = color;
-		}
-
-		public Key getKey() {
-			return key;
-		}
-
-		public void setKey(Key key) {
-			this.key = key;
 		}
 
 		public String getValue() {
@@ -73,6 +63,9 @@ public class AkirixBalancedSearchTree<Key extends Comparable<Key>> {
 	
 	public void insert(String value) {
 		
+		if(root == null) {
+			root = new Node(value, 1, BLACK);
+		}
 	}
 	
 	public void remove(String value) {
