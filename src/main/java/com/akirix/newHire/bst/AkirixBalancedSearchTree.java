@@ -66,6 +66,16 @@ public class AkirixBalancedSearchTree {
 		if(root == null) {
 			root = new Node(value, 1, BLACK);
 		}
+		
+		int compare = value.compareToIgnoreCase(root.getValue());
+		
+		if(compare > 0) {
+			
+		}
+		
+		if(compare < 0) {
+			
+		}
 	}
 	
 	public void remove(String value) {
