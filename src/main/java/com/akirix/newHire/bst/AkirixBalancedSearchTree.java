@@ -15,13 +15,11 @@ public class AkirixBalancedSearchTree {
 		private boolean color;
 		
 		public Node(String value, int size, boolean color) {
+			this.left = null;
+			this.right = null;
 			this.value = value;
 			this.size = size;
 			this.color = color;
-		}
-		
-		public void print() {
-			System.out.print(this.getValue());
 		}
 
 		public String getValue() {
@@ -65,7 +63,9 @@ public class AkirixBalancedSearchTree {
 		}
 	}
 	
-	public AkirixBalancedSearchTree() {};
+	public AkirixBalancedSearchTree() {
+		this.root = null;
+	}
 	
 	public void insert(String value) {
 		
@@ -76,21 +76,21 @@ public class AkirixBalancedSearchTree {
 	private Node insert(Node node, String value) {
 		
 		if(node == null) {
-			node = new Node(value, 1, RED);
+			return new Node(value, 1, RED);
 		}
 		
 		int compare = value.compareToIgnoreCase(root.getValue());
 		
 		//The root value is greater
 		if(compare > 0) {
-			//insert on the left side
-			node.setLeft(insert(node.getLeft(), value));
+			//Insert on the right side
+			node.setRight(insert(node.getRight(), value));
 		}
 		
 		//The value we're adding is greater
 		if(compare < 0) {
-			//Insert on the right side
-			node.setRight(insert(node.getRight(), value));
+			//insert on the left side
+			node.setLeft(insert(node.getLeft(), value));
 		}
 		
 		return node;
@@ -121,25 +121,25 @@ public class AkirixBalancedSearchTree {
 	}
 	
 	public void print() {
-		int nestings = 0;
-		print(nestings, root);
-		root.print();
+		print(0, root);
 	}
 	
 	private void print(int nestings, Node node) {
-		if(node.getLeft() != null) {
-			print(nestings + 1, node.getLeft());
-		}
-		else if(node.getRight() != null) {
-			print(nestings + 1, node.getRight());
-		}
-		else {
-			printSpacer(nestings);
-			node.print();
+		System.out.print(makeSpacer(nestings) + (node == null ? "NULL" : node.getValue()));
+		System.out.print("\n");
+		if(node != null) {
+			if(node.getLeft() != null) {
+				if(isRed(node)) print(nestings, node.getLeft());
+				else print(nestings + 1, node.getLeft());
+			}
+			if(node.getRight() != null) {
+				if(isRed(node)) print(nestings, node.getRight());
+				else print(nestings + 1, node.getRight());
+			}
 		}
 	}
 	
-	private void printSpacer(int nestings) {
+	private String makeSpacer(int nestings) {
 		String spacer = "";
 		for(int i = nestings; i > 0; i--) {
 			if(i > 1) {
@@ -148,9 +148,9 @@ public class AkirixBalancedSearchTree {
 			else if(i == 1) {
 				spacer += "+-";
 			}
-			else spacer += "|";
+			else spacer += "\\|";
 		}
-		System.out.print(spacer);
+		return spacer;
 	}
 	
 	public boolean isRed(Node x) {
@@ -159,7 +159,7 @@ public class AkirixBalancedSearchTree {
 	}
 	
 	public boolean isBlack(Node x) {
-		if(x == null) return false;
+		if(x == null) return true;
 		return x.getColor() == BLACK;
 	}
 }

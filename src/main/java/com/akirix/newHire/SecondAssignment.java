@@ -15,6 +15,12 @@ public class SecondAssignment {
 		
 		tree = performInsert(tree);
 		
+		tree.print();
+		
+		//tree.insert("s");
+		
+		//tree.print();
+		
 		//TODO: Do the implementation here..
 		
 		//Print a notice that second assignment demo is done
@@ -25,7 +31,7 @@ public class SecondAssignment {
 		final Random rnd = new Random();
 		
 		String chars = "abcdefghijklmnopqrstuvwxyz";
-		for(int i = 0; i < 26; i++) {
+		for(int i = 0; i < 5; i++) {
 			int index = rnd.nextInt(chars.length());
 			String selection = Character.toString(chars.charAt(index));
 			chars = chars.substring(0, index) + chars.substring(index+1);
