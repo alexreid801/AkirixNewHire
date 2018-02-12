@@ -93,6 +93,14 @@ public class AkirixBalancedSearchTree {
 			node.setLeft(insert(node.getLeft(), value));
 		}
 		
+		//Need to rotate left if right is red while left is black
+		if(isRed(node.getRight()) && !isRed(node.getLeft())) {
+			node = rotateLeft(node);
+		}
+		
+		//Set the side
+		node.setSize(node.getLeft().getSize() + node.getRight().getSize());
+		
 		return node;
 	}
 	
