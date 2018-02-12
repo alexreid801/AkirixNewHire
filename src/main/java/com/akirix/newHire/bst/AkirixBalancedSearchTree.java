@@ -69,12 +69,16 @@ public class AkirixBalancedSearchTree {
 		
 		int compare = value.compareToIgnoreCase(root.getValue());
 		
+		//The root value is greater
 		if(compare > 0) {
-			
+			//insert on the left side
+			root.setLeft();
 		}
 		
+		//The value we're adding is greater
 		if(compare < 0) {
-			
+			//Insert on the right side
+			root.setRight();
 		}
 	}
 	
