@@ -97,9 +97,12 @@ public class AkirixBalancedSearchTree {
 		if(isRed(node.getRight()) && !isRed(node.getLeft())) {
 			node = rotateLeft(node);
 		}
+		//Need to rotate right if left and left's left are both red
+		
+		//Need to flip colors if both left and right children are red
 		
 		//Set the side
-		node.setSize(node.getLeft().getSize() + node.getRight().getSize());
+		//node.setSize(node.getLeft().getSize() + node.getRight().getSize());
 		
 		return node;
 	}
@@ -174,7 +177,7 @@ public class AkirixBalancedSearchTree {
 		
 		//Switch size and adjust root nodes size to reflect new structure
 		x.setSize(node.getSize());
-		node.setSize(1 + node.getLeft().getSize() + node.getRight().getSize());
+		//node.setSize(1 + node.getLeft().getSize() + node.getRight().getSize());
 		return x;
 	}
 	
@@ -191,8 +194,16 @@ public class AkirixBalancedSearchTree {
 		
 		//Switch size and adjust root nodes size to reflect new structure
 		x.setSize(node.getSize());
-		node.setSize(1 + node.getLeft().getSize() + node.getRight().getSize());
+		//node.setSize(1 + node.getLeft().getSize() + node.getRight().getSize());
 		return x;
+	}
+	
+	private void flipColors(Node node) {
+		
+		//Set root node red and child left and right nodes black
+		node.setColor(RED);
+		node.getLeft().setColor(BLACK);
+		node.getRight().setColor(BLACK);
 	}
 	
 	private boolean isRed(Node x) {
