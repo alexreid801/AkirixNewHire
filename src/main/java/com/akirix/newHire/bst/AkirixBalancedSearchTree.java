@@ -75,39 +75,29 @@ public class AkirixBalancedSearchTree {
 	
 	private Node insert(Node node, String value) {
 		
+		//Make new node if the node is inexistant
 		if(node == null) {
 			return new Node(value, 1, RED);
 		}
 		
+		//Create a comparison so we don't have to run compare twice
 		int compare = value.compareToIgnoreCase(root.getValue());
 		
-		//The root value is greater
-		if(compare > 0) {
-			//Insert on the right side
-			node.setRight(insert(node.getRight(), value));
-		}
+		//The root value is greater, Insert on the right side
+		if(compare > 0) node.setRight(insert(node.getRight(), value));
 		
-		//The value we're adding is greater
-		if(compare < 0) {
-			//insert on the left side
-			node.setLeft(insert(node.getLeft(), value));
-		}
+		//The value we're adding is greater, insert on the left side
+		if(compare < 0) node.setLeft(insert(node.getLeft(), value));
 		
 		//Need to rotate left if right is red while left is black
-		//if(node.getRight() != null && node.getLeft() != null) {
-			if(isRed(node.getRight()) && !isRed(node.getLeft())) {
-				node = rotateLeft(node);
-			}
-		//}
+		if(isRed(node.getRight()) && isBlack(node.getLeft())) {
+			node = rotateLeft(node);
+		}
 		
 		//Need to rotate right if left and left's left are both red
-		//if(node.getLeft() != null) {
-			//if(node.getLeft().getLeft() != null) {
-				if(isRed(node.getLeft()) && isRed(node.getLeft().getLeft())) {
-					node = rotateRight(node);
-				}
-			//}
-		//}
+		if(isRed(node.getLeft()) && isRed(node.getLeft().getLeft())) {
+			node = rotateRight(node);
+		}
 		
 		//Need to flip colors if both left and right children are red
 		if(isRed(node.getLeft()) && isRed(node.getRight())) {
@@ -115,7 +105,7 @@ public class AkirixBalancedSearchTree {
 		}
 		
 		//Set the side
-		//node.setSize(node.getLeft().getSize() + node.getRight().getSize());
+		node.setSize(size(node.getLeft()) + size(node.getRight()) + 1);
 		
 		return node;
 	}
@@ -186,7 +176,7 @@ public class AkirixBalancedSearchTree {
 		
 		//Switch size and adjust root nodes size to reflect new structure
 		x.setSize(node.getSize());
-		//node.setSize(1 + node.getLeft().getSize() + node.getRight().getSize());
+		node.setSize(1 + size(node.getLeft()) + size(node.getRight()));
 		return x;
 	}
 	
@@ -203,7 +193,7 @@ public class AkirixBalancedSearchTree {
 		
 		//Switch size and adjust root nodes size to reflect new structure
 		x.setSize(node.getSize());
-		//node.setSize(1 + node.getLeft().getSize() + node.getRight().getSize());
+		node.setSize(1 + size(node.getLeft()) + size(node.getRight()));
 		return x;
 	}
 	
@@ -223,5 +213,10 @@ public class AkirixBalancedSearchTree {
 	private boolean isBlack(Node x) {
 		if(x == null) return true;
 		return x.getColor() == BLACK;
+	}
+	
+	private int size(Node node) {
+		if(node == null) return 0;
+		return node.getSize();
 	}
 }
