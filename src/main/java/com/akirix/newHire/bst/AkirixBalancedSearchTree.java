@@ -63,8 +63,13 @@ public class AkirixBalancedSearchTree {
 	
 	public void insert(String value) {
 		
-		if(root == null) {
-			root = new Node(value, 1, BLACK);
+		root = insert(root, value);
+	}
+	
+	public Node insert(Node node, String value) {
+		
+		if(node == null) {
+			node = new Node(value, 1, BLACK);
 		}
 		
 		int compare = value.compareToIgnoreCase(root.getValue());
@@ -72,14 +77,16 @@ public class AkirixBalancedSearchTree {
 		//The root value is greater
 		if(compare > 0) {
 			//insert on the left side
-			root.setLeft();
+			node.setLeft(insert(node.getLeft(), value));
 		}
 		
 		//The value we're adding is greater
 		if(compare < 0) {
 			//Insert on the right side
-			root.setRight();
+			node.setRight(insert(node.getLeft(), value));
 		}
+		
+		return node;
 	}
 	
 	public void remove(String value) {
