@@ -1,6 +1,6 @@
 package com.akirix.newHire;
 
-public class Assignment {
+public class Application {
 
 	public static void main(String[] args) {
 		
@@ -11,7 +11,7 @@ public class Assignment {
 		FirstAssignment.run();
 		SecondAssignment.run();
 		
-		//Print a welcome message that the application is running
+		//Print a thank you message for running the application
 		System.out.println("Thank you for running the Akirix New Hire Assignment!");
 	}
 
