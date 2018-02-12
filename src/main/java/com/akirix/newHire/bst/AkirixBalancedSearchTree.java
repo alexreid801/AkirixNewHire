@@ -1,18 +1,25 @@
 package com.akirix.newHire.bst;
 
-public class AkirixBalancedSearchTree<Key extends Comparable<Key>, Value> {
+public class AkirixBalancedSearchTree<Key extends Comparable<Key>> {
+	
+	private Node root;
+	
+	private static final boolean RED   = true;
+	private static final boolean BLACK = true;
 	
 	class Node {
 		
 		private Key key;
-		private Value value;
+		private String value;
 		private Node left, right;
 		private int size;
+		private boolean color;
 		
-		Node(Key key, Value value, int size) {
-			this.setKey(key);
-			this.setValue(value);
-			this.setSize(size);
+		public Node(Key key, String value, int size, boolean color) {
+			this.key = key;
+			this.value = value;
+			this.size = size;
+			this.color = color;
 		}
 
 		public Key getKey() {
@@ -54,5 +61,39 @@ public class AkirixBalancedSearchTree<Key extends Comparable<Key>, Value> {
 		public void setSize(int size) {
 			this.size = size;
 		}
+
+		public boolean getColor() {
+			return color;
+		}
+
+		public void setColor(boolean color) {
+			this.color = color;
+		}
+	}
+	
+	public void insert(String value) {
+		
+	}
+	
+	public void remove(String value) {
+		
+	}
+	
+	public boolean find(String value) {
+		return false;
+	}
+	
+	public void print() {
+		
+	}
+	
+	public boolean isRed(Node x) {
+		if(x == null) return false;
+		return x.getColor() == RED;
+	}
+	
+	public boolean isBlack(Node x) {
+		if(x == null) return false;
+		return x.getColor() == BLACK;
 	}
 }
