@@ -119,7 +119,7 @@ public class AkirixBalancedSearchTree {
 		
 		int compare = value.compareToIgnoreCase(root.getValue());
 		
-		//The root value is greater
+		//The current nodes value is greater
 		if(compare > 0) {
 		}
 		
@@ -131,35 +131,36 @@ public class AkirixBalancedSearchTree {
 	}
 	
 	public boolean find(String value) {
-		return false;
+		return find(root, value) != null;
 	}
 	
 	public Node find(Node node, String value) {
 		
+		if(node == null) return null;
+		
 		int compare = value.compareToIgnoreCase(node.getValue());
 		
-		//The root value is greater
+		//The current node value is greater
 		if(compare > 0) {
-			
+			node = find(node.getLeft(), value);
 		}
 		
-		//The value we're removing is greater
+		//The value we're looking for is greater
 		if(compare < 0) {
-			
+			node = find(node.getRight(), value);
 		}
 		
 		return node;
 	}
 	
 	public void print() {
-		//print(0, root);
-		print(root, "", false, !isRed(root.getLeft()));
+		print(root, "", true);
 	}
 	
-	public void print(Node node, String indent, boolean red, boolean isLast) {
+	public void print(Node node, String indent, boolean isLast) {
 		
 		System.out.print(indent);
-		if(!red && isLast) {
+		if(isLast) {
 			System.out.print("\\-");
 			indent += "  ";
 		}
@@ -169,14 +170,38 @@ public class AkirixBalancedSearchTree {
 		}
 		System.out.print(print(node) + "\n");
 		if(node != null) {
-			print(node.getRight(), indent, isRed(node.getRight()), false);
-			print(node.getLeft(), indent, isRed(node.getLeft()), !isRed(node.getLeft()));
+			print(node.getLeft(), indent, false);
+			print(node.getRight(), indent, true);
 		}
 	}
 	
 	private String print(Node node) {
 		if(node == null) return "NULL";
 		return node.getValue() + ":" + (isRed(node) ? "RED" : "BLACK");
+	}
+	
+	private void print(int nestings, Node node) {
+		System.out.print(makeSpacer(nestings) + (node == null ? "NULL" : node.getValue()));
+		System.out.print("\n");
+		if(node != null) {
+			if(isRed(node.getLeft())) print(nestings, node.getLeft());
+			if(isBlack(node.getLeft())) print(nestings + 1, node.getLeft());
+			if(isRed(node.getRight())) print(nestings, node.getRight());
+			if(isBlack(node.getRight())) print(nestings + 1, node.getRight());
+		}
+	}
+	
+	private static String makeSpacer(int nestings) {
+		String spacer = "";
+		for(int i = nestings; i > 0; i--) {
+			if(i > 1) {
+				spacer += "  ";
+			}
+			else if(i == 1) {
+				spacer += "+-";
+			}
+		}
+		return spacer;
 	}
 	
 	private Node rotateLeft(Node node) {
