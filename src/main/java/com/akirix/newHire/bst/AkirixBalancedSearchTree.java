@@ -137,14 +137,10 @@ public class AkirixBalancedSearchTree {
 		int compare = value.compareToIgnoreCase(root.getValue());
 		
 		//The current nodes value is greater
-		if(compare > 0) {
-			node.setRight(remove(node.getRight(), value));
-		}
+		if(compare > 0) node.setRight(remove(node.getRight(), value));
 		
 		//The value we're removing is greater
-		if(compare < 0) {
-			node.setLeft(remove(node.getLeft(), value));
-		}
+		if(compare < 0) node.setLeft(remove(node.getLeft(), value));
 		
 		return node;
 	}
@@ -161,14 +157,10 @@ public class AkirixBalancedSearchTree {
 		int compare = value.compareToIgnoreCase(node.getValue());
 		
 		//The value we're looking for is greater
-		if(compare < 0) {
-			node = find(node.getLeft(), value);
-		}
+		if(compare < 0) node = find(node.getLeft(), value);
 		
 		//The current node value is greater
-		if(compare > 0) {
-			node = find(node.getRight(), value);
-		}
+		if(compare > 0) node = find(node.getRight(), value);
 		
 		return node;
 	}
