@@ -63,14 +63,23 @@ public class AkirixBalancedSearchTree {
 		}
 	}
 	
-	public AkirixBalancedSearchTree() {
-		this.root = null;
-	}
+	public AkirixBalancedSearchTree() {}
 	
 	public void insert(String value) {
-		
 		root = insert(root, value);
 		root.setColor(BLACK);
+	}
+	
+	public boolean find(String value) {
+		return find(root, value) != null;
+	}
+	
+	public void remove(String value) {
+		root = remove(root, value);
+	}
+	
+	public void print() {
+		print(root, "", true);
 	}
 	
 	private Node insert(Node node, String value) {
@@ -114,15 +123,11 @@ public class AkirixBalancedSearchTree {
 		return node;
 	}
 	
-	public void remove(String value) {
-		root = remove(root, value);
-	}
-	
 	private Node remove(Node node, String value) {
 		
-		//Make new node if the node is inexistant
+		//Prevent null pointer
 		if(node == null) {
-			return node;
+			return null;
 		}
 		
 		//If this is the node to delete, it's now null
@@ -142,10 +147,6 @@ public class AkirixBalancedSearchTree {
 		}
 		
 		return node;
-	}
-	
-	public boolean find(String value) {
-		return find(root, value) != null;
 	}
 	
 	public Node find(Node node, String value) {
@@ -172,11 +173,7 @@ public class AkirixBalancedSearchTree {
 		return node;
 	}
 	
-	public void print() {
-		print(root, "", true);
-	}
-	
-	public void print(Node node, String indent, boolean isLast) {
+	private void print(Node node, String indent, boolean isLast) {
 		
 		System.out.print(indent);
 		if(isLast) {
