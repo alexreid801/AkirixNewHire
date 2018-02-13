@@ -102,16 +102,16 @@ public class SecondAssignment {
 		
 		//Try to remove 4 random 'used characters' in the tree.
 		for(int i = 0; i < 4; i++) {
-			int index = rnd.nextInt(availChars.length());
-			String selection = Character.toString(availChars.charAt(index));
-			availChars = availChars.substring(0, index) + availChars.substring(index + 1);
+			int index = rnd.nextInt(usedChars.length());
+			String selection = Character.toString(usedChars.charAt(index));
+			usedChars = usedChars.substring(0, index) + usedChars.substring(index + 1);
 			tree.remove(selection);
 		}
 		
 		//Print a notice that we are about to try to remove 4 letters that do not exist in the tree
 		System.out.println("Trying to remove 4 letters that are not in the tree..");
 		
-		//Try to remove 4 random 'used characters' in the tree.
+		//Try to remove 4 random 'available characters' in the tree.
 		for(int i = 0; i < 4; i++) {
 			int index = rnd.nextInt(availChars.length());
 			String selection = Character.toString(availChars.charAt(index));
