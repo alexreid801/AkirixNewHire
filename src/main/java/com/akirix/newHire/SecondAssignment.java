@@ -8,7 +8,7 @@ public class SecondAssignment {
 	
 	private AkirixBalancedSearchTree tree;
 	
-	private String availChars = "abcdefghijklmnopqrstuvwxyz";
+	private String availChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	private String usedChars = "";
 	
 	private final Random rnd = new Random();
@@ -49,11 +49,11 @@ public class SecondAssignment {
 		System.out.println("Assignment demo 2 is done.");
 	}
 
-	public SecondAssignment(AkirixBalancedSearchTree tree) {
+	private SecondAssignment(AkirixBalancedSearchTree tree) {
 		this.tree = tree;
 	}
 	
-	public void performInsert() {
+	private void performInsert() {
 		
 		//Print a notice that we are about to add 18 letters to the tree
 		System.out.println("Adding 18 random letters to the tree..");
@@ -79,7 +79,7 @@ public class SecondAssignment {
 		}
 	}
 	
-	public void performFind() {
+	private void performFind() {
 		
 		//Print a notice that we are about to try to find 4 letters that exist in the tree
 		System.out.println("Trying to find 4 letters that are in the tree..");

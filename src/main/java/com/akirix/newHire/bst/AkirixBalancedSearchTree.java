@@ -185,7 +185,7 @@ public class AkirixBalancedSearchTree {
 	
 	private String print(Node node) {
 		if(node == null) return "NULL";
-		return node.getValue() + ":" + (isRed(node) ? "RED" : "BLACK");
+		return node.getValue() + ":" + (isRed(node) ? "red" : "black");
 	}
 	
 	private Node rotateLeft(Node node) {

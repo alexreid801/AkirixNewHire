@@ -61,7 +61,7 @@ public class FirstAssignment {
 		System.out.println(Arrays.toString(unsortedEmployees));
 	}
 	
-	public static void runPartTwo() {
+	private static void runPartTwo() {
 
 		//Print a message that we are about to do the hours and minutes sort example
 		System.out.println("Running hours and minutes sort example..");
@@ -99,7 +99,7 @@ public class FirstAssignment {
 		System.out.println(Arrays.toString(unsortedHoursAndMinutes));
 	}
 	
-	public static void runPartThree() {
+	private static void runPartThree() {
 
 		//Print a message that we are about to do the plane sort example
 		System.out.println("Running planets sort example..");
