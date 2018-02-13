@@ -31,7 +31,7 @@ public class SecondAssignment {
 		final Random rnd = new Random();
 		
 		String chars = "abcdefghijklmnopqrstuvwxyz";
-		for(int i = 0; i < 5; i++) {
+		for(int i = 0; i < 15; i++) {
 			int index = rnd.nextInt(chars.length());
 			String selection = Character.toString(chars.charAt(index));
 			chars = chars.substring(0, index) + chars.substring(index+1);
