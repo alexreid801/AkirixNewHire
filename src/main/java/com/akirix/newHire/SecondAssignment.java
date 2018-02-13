@@ -58,12 +58,23 @@ public class SecondAssignment {
 		//Print a notice that we are about to add 18 letters to the tree
 		System.out.println("Adding 18 random letters to the tree..");
 		
-		//insert 18 random 'available characters' to the tree.  Also add them to 'used characters'
+		//Insert 18 random 'available characters' to the tree.  Also add them to 'used characters'
 		for(int i = 0; i < 18; i++) {
 			int index = rnd.nextInt(availChars.length());
 			String selection = Character.toString(availChars.charAt(index));
 			availChars = availChars.substring(0, index) + availChars.substring(index + 1);
 			usedChars += selection;
+			tree.insert(selection);
+		}
+		
+		//Print a notice that we are about to try to add 4 letters that are already in the tree
+		System.out.println("Trying to add 4 random letters that are already in the tree..");
+		
+		//Try to insert 4 random 'used characters' to the tree.
+		for(int i = 0; i < 4; i++) {
+			int index = rnd.nextInt(usedChars.length());
+			String selection = Character.toString(usedChars.charAt(index));
+			usedChars = usedChars.substring(0, index) + usedChars.substring(index + 1);
 			tree.insert(selection);
 		}
 	}
@@ -106,6 +117,7 @@ public class SecondAssignment {
 			String selection = Character.toString(usedChars.charAt(index));
 			usedChars = usedChars.substring(0, index) + usedChars.substring(index + 1);
 			tree.remove(selection);
+			printRemoveResult(selection);
 		}
 		
 		//Print a notice that we are about to try to remove 4 letters that do not exist in the tree
@@ -117,10 +129,15 @@ public class SecondAssignment {
 			String selection = Character.toString(availChars.charAt(index));
 			availChars = availChars.substring(0, index) + availChars.substring(index + 1);
 			tree.remove(selection);
+			printRemoveResult(selection);
 		}
 	}
 	
 	private static void printFoundResult(String value, boolean found) {
 		System.out.println("The letter " + value + (found ? " was found" : " was not found") + " in the tree.");
+	}
+	
+	private static void printRemoveResult(String value) {
+		System.out.println("The letter " + value + " is being removed from the tree.");
 	}
 }

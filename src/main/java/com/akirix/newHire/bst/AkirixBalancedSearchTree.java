@@ -80,14 +80,18 @@ public class AkirixBalancedSearchTree {
 			return new Node(value, 1, RED);
 		}
 		
-		//Create a comparison so we don't have to run compare twice
-		int compare = value.compareToIgnoreCase(root.getValue());
+		//Do nothing if the node itself if equal
+		if(!node.getValue().equalsIgnoreCase(value)) {
 		
-		//The root value is greater, Insert on the right side
-		if(compare > 0) node.setRight(insert(node.getRight(), value));
-		
-		//The value we're adding is greater, insert on the left side
-		if(compare < 0) node.setLeft(insert(node.getLeft(), value));
+			//Create a comparison so we don't have to run compare twice
+			int compare = value.compareToIgnoreCase(node.getValue());
+			
+			//The value we're adding is greater, insert on the left side
+			if(compare < 0) node.setLeft(insert(node.getLeft(), value));
+			
+			//The root value is greater, Insert on the right side
+			if(compare > 0) node.setRight(insert(node.getRight(), value));
+		}
 		
 		//Need to rotate left if right is red while left is black
 		if(isRed(node.getRight()) && isBlack(node.getLeft())) {
@@ -116,14 +120,25 @@ public class AkirixBalancedSearchTree {
 	
 	private Node remove(Node node, String value) {
 		
+		//Make new node if the node is inexistant
+		if(node == null) {
+			return node;
+		}
+		
+		//If this is the node to delete, it's now null
+		if(node.getValue().equalsIgnoreCase(value)) return null;
+			
+		//Create a comparison so we don't have to run compare twice
 		int compare = value.compareToIgnoreCase(root.getValue());
 		
 		//The current nodes value is greater
 		if(compare > 0) {
+			node.setRight(remove(node.getRight(), value));
 		}
 		
 		//The value we're removing is greater
 		if(compare < 0) {
+			node.setLeft(remove(node.getLeft(), value));
 		}
 		
 		return node;
@@ -135,17 +150,22 @@ public class AkirixBalancedSearchTree {
 	
 	public Node find(Node node, String value) {
 		
+		//Return null nodes as null
 		if(node == null) return null;
 		
-		int compare = value.compareToIgnoreCase(node.getValue());
+		//Return the node itself if equal
+		if(node.getValue().equalsIgnoreCase(value)) return node;
 		
-		//The current node value is greater
-		if(compare > 0) {
-			node = find(node.getLeft(), value);
-		}
+		//Create a comparison so we don't have to run compare twice
+		int compare = value.compareToIgnoreCase(node.getValue());
 		
 		//The value we're looking for is greater
 		if(compare < 0) {
+			node = find(node.getLeft(), value);
+		}
+		
+		//The current node value is greater
+		if(compare > 0) {
 			node = find(node.getRight(), value);
 		}
 		
@@ -177,30 +197,6 @@ public class AkirixBalancedSearchTree {
 	private String print(Node node) {
 		if(node == null) return "NULL";
 		return node.getValue() + ":" + (isRed(node) ? "RED" : "BLACK");
-	}
-	
-	private void print(int nestings, Node node) {
-		System.out.print(makeSpacer(nestings) + (node == null ? "NULL" : node.getValue()));
-		System.out.print("\n");
-		if(node != null) {
-			if(isRed(node.getLeft())) print(nestings, node.getLeft());
-			if(isBlack(node.getLeft())) print(nestings + 1, node.getLeft());
-			if(isRed(node.getRight())) print(nestings, node.getRight());
-			if(isBlack(node.getRight())) print(nestings + 1, node.getRight());
-		}
-	}
-	
-	private static String makeSpacer(int nestings) {
-		String spacer = "";
-		for(int i = nestings; i > 0; i--) {
-			if(i > 1) {
-				spacer += "  ";
-			}
-			else if(i == 1) {
-				spacer += "+-";
-			}
-		}
-		return spacer;
 	}
 	
 	private Node rotateLeft(Node node) {
