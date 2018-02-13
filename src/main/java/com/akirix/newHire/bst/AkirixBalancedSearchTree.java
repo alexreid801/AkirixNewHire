@@ -111,7 +111,6 @@ public class AkirixBalancedSearchTree {
 	}
 	
 	public void remove(String value) {
-		
 		root = remove(root, value);
 	}
 	

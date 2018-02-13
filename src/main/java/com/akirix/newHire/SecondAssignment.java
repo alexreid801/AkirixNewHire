@@ -6,39 +6,121 @@ import com.akirix.newHire.bst.AkirixBalancedSearchTree;
 
 public class SecondAssignment {	
 	
+	private AkirixBalancedSearchTree tree;
+	
+	private String availChars = "abcdefghijklmnopqrstuvwxyz";
+	private String usedChars = "";
+	
+	private final Random rnd = new Random();
+	
 	public static void run() {
 		
 		//Print a notice that second assignment demo is running
 		System.out.println("Running assignment demo 2..");
 		
-		AkirixBalancedSearchTree tree = new AkirixBalancedSearchTree();
+		//Make a new second assignent with a new search tree in it
+		SecondAssignment assn = new SecondAssignment(new AkirixBalancedSearchTree());
 		
-		tree = performInsert(tree);
+		//Print a notice that we are performing the insert demo
+		System.out.println("Running the insert demo..");
 		
-		tree.print();
+		//Perform the insert demo
+		assn.performInsert();
 		
-		//tree.insert("s");
+		//Print the representation of the tree
+		assn.tree.print();
 		
-		//tree.print();
+		//Print a notice that we are performing the find demo
+		System.out.println("Running the find demo..");
 		
-		//TODO: Do the implementation here..
+		//Perform the find demo
+		assn.performFind();
+		
+		//Print a notice that we are performing the remove demo
+		System.out.println("Running the remove demo..");
+		
+		//Perform the remove demo
+		assn.performRemove();
+		
+		//Print the final representation of the tree (to show removed nodes)
+		assn.tree.print();
 		
 		//Print a notice that second assignment demo is done
 		System.out.println("Assignment demo 2 is done.");
 	}
+
+	public SecondAssignment(AkirixBalancedSearchTree tree) {
+		this.tree = tree;
+	}
 	
-	public static AkirixBalancedSearchTree performInsert(AkirixBalancedSearchTree tree) {
-		final Random rnd = new Random();
+	public void performInsert() {
 		
-		String chars = "abcdefghijklmnopqrstuvwxyz";
-		for(int i = 0; i < 15; i++) {
-			int index = rnd.nextInt(chars.length());
-			String selection = Character.toString(chars.charAt(index));
-			chars = chars.substring(0, index) + chars.substring(index+1);
-			
+		//Print a notice that we are about to add 18 letters to the tree
+		System.out.println("Adding 18 random letters to the tree..");
+		
+		//insert 18 random 'available characters' to the tree.  Also add them to 'used characters'
+		for(int i = 0; i < 18; i++) {
+			int index = rnd.nextInt(availChars.length());
+			String selection = Character.toString(availChars.charAt(index));
+			availChars = availChars.substring(0, index) + availChars.substring(index + 1);
+			usedChars += selection;
 			tree.insert(selection);
 		}
+	}
+	
+	public void performFind() {
 		
-		return tree;
+		//Print a notice that we are about to try to find 4 letters that exist in the tree
+		System.out.println("Trying to find 4 letters that are in the tree..");
+		
+		//Try to find 4 random 'used characters' in the tree.
+		for(int i = 0; i < 4; i++) {
+			int index = rnd.nextInt(usedChars.length());
+			String selection = Character.toString(usedChars.charAt(index));
+			usedChars = usedChars.substring(0, index) + usedChars.substring(index + 1);
+			boolean found = tree.find(selection);
+			printFoundResult(selection, found);
+		}
+		
+		//Print a notice that we are about to try to find 4 letters that do not exist in the tree
+		System.out.println("Trying to find 4 letters that are not in the tree..");
+		
+		//Try to find 4 random 'available characters' in the tree.
+		for(int i = 0; i < 4; i++) {
+			int index = rnd.nextInt(availChars.length());
+			String selection = Character.toString(availChars.charAt(index));
+			availChars = availChars.substring(0, index) + availChars.substring(index + 1);
+			boolean found = tree.find(selection);
+			printFoundResult(selection, found);
+		}
+	}
+	
+	private void performRemove() {
+		
+		//Print a notice that we are about to remove 4 letters that exist in the tree
+		System.out.println("Removing 4 letters that are in the tree..");
+		
+		//Try to remove 4 random 'used characters' in the tree.
+		for(int i = 0; i < 4; i++) {
+			int index = rnd.nextInt(availChars.length());
+			String selection = Character.toString(availChars.charAt(index));
+			availChars = availChars.substring(0, index) + availChars.substring(index + 1);
+			tree.remove(selection);
+		}
+		
+		//Print a notice that we are about to try to remove 4 letters that do not exist in the tree
+		System.out.println("Trying to remove 4 letters that are not in the tree..");
+		
+		//Try to remove 4 random 'used characters' in the tree.
+		for(int i = 0; i < 4; i++) {
+			int index = rnd.nextInt(availChars.length());
+			String selection = Character.toString(availChars.charAt(index));
+			availChars = availChars.substring(0, index) + availChars.substring(index + 1);
+			tree.remove(selection);
+		}
+	}
+	
+	private static void printFoundResult(String value, boolean found) {
+		System.out.println("The letter " + value + (found ? " was found" : " was not found") + " in the tree.");
 	}
 }
